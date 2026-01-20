@@ -128,27 +128,29 @@ public class InventoryManager : MonoBehaviour
 
     private void OnHotbarSelected(HotbarSlot hotbarSlot)
     {
-        if(hotbarSlot.ItemInstance.ItemData == null && descriptionUI.activeSelf == true)
+        if (hotbarSlot.ItemInstance.ItemData == null)
         {
-            descriptionUIFader.FadeOut(0.25f);
-        }
-        else
-        {
-            descriptionUIFader.FadeIn(0.25f);
-            selectedItemNameUILabel.text = hotbarSlot.ItemInstance.ItemData.displayName;
-            selectedItemDescriptionUILabel.text = hotbarSlot.ItemInstance.ItemData.description;
-            selectedItemStatNamesUILabel.text = "";
-            selectedItemStatValuesUILabel.text = "";
-
-            for (int i = 0; i < hotbarSlot.ItemInstance.ItemData.consumables.Length; i++)
+            if (descriptionUI.activeSelf == true)
             {
-                selectedItemStatNamesUILabel.text += hotbarSlot.ItemInstance.ItemData.consumables[i].type + "\n";
-                selectedItemStatValuesUILabel.text += hotbarSlot.ItemInstance.ItemData.consumables[i].value + "\n";
+                descriptionUIFader.FadeOut(0.25f);
             }
-            
-           
-           // descriptionUIFader.FadeOut(1f);
+            return;
         }
+
+        descriptionUIFader.FadeIn(0.25f);
+        selectedItemNameUILabel.text = hotbarSlot.ItemInstance.ItemData.displayName;
+        selectedItemDescriptionUILabel.text = hotbarSlot.ItemInstance.ItemData.description;
+        selectedItemStatNamesUILabel.text = "";
+        selectedItemStatValuesUILabel.text = "";
+
+        for (int i = 0; i < hotbarSlot.ItemInstance.ItemData.consumables.Length; i++)
+        {
+            selectedItemStatNamesUILabel.text += hotbarSlot.ItemInstance.ItemData.consumables[i].type + "\n";
+            selectedItemStatValuesUILabel.text += hotbarSlot.ItemInstance.ItemData.consumables[i].value + "\n";
+        }
+        
+       
+       // descriptionUIFader.FadeOut(1f);
     }
     public void SelectSlot(int index)
     {
